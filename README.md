@@ -12,12 +12,17 @@ You type:   <div>
 You get:    <div>|</div>    (cursor lands at |, ready to type content)
 ```
 
-Press the **jump hotkey** to move the cursor past the closing tag:
+Press comma twice to move the cursor past the current closing tag.
+The two trigger commas are deleted automatically.
 
-| Platform       | Hotkey                          |
-|----------------|---------------------------------|
-| macOS          | `Cmd + <` (= Cmd + Shift + ,)   |
-| Windows/Linux  | `Alt + <` (= Alt + Shift + ,)   |
+Example:
+
+```
+<example>The <hardware>keyboard,,</hardware> is useful.,,</example>
+```
+
+After the first two commas, the cursor jumps past `</hardware>`. After the
+second two commas, it jumps past `</example>`.
 
 ## Installation
 
@@ -88,7 +93,8 @@ python3 ~/xml-autocloser/xml_autocloser.py &
 - **Paste operations** are not tracked (pasted text won't be in the script's
   buffer, so pasting `<div>` won't auto-close it)
 - **Cursor movement** (arrow keys, mouse clicks) can desync the buffer from
-  the actual cursor position. In practice this is rarely an issue
+  the actual cursor position. Arrow-key movement clears pending jump targets
+  when detected
 - **VS Code** has its own auto-close extensions that may conflict; the script
   still works but you may get double insertions — disable VS Code's built-in
   auto-close if needed
